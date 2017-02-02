@@ -8,7 +8,7 @@ require_relative "jekyll/version"
 
 module Rack
   class Jekyll
-
+    include Jekyll
     attr_reader :config, :destination, :wait_page, :site
 
     # Initializes a new Rack::Jekyll site.
