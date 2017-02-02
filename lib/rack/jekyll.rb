@@ -118,7 +118,7 @@ module Rack
       @compile_queue << '.'
 
       Thread.new do
-        @site.process
+        @site.reset
         @files.update
         @compile_queue.clear
       end
