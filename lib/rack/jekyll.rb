@@ -118,7 +118,7 @@ module Rack
       @compile_queue << '.'
 
       Thread.new do
-        @site.reset
+        system("bundle", "exec", "jekyll build")
         @files.update
         @compile_queue.clear
       end
