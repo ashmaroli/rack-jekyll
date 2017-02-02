@@ -9,7 +9,7 @@ require_relative "jekyll/version"
 module Rack
   class Jekyll
 
-    attr_reader :config, :destination, :wait_page
+    attr_reader :config, :destination, :wait_page, :site
 
     # Initializes a new Rack::Jekyll site.
     #
@@ -35,13 +35,13 @@ module Rack
       overrides.delete(:force_build)
       overrides.delete(:auto)
       overrides.delete(:wait_page)
-      @config = ::Jekyll.configuration(overrides)
+      @site = site
+      @config = site.config
 
       @destination = @config["destination"]
       @source      = @config["source"]
 
       @files = FileHandler.new(@destination)
-      @site = ::Jekyll::Site.new(@config)
 
       if @files.empty? || @force_build
         process("Generating site: #{@source} -> #{@destination}")
